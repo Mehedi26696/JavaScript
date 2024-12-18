@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <link rel="stylesheet" href="1.css">
+<body>
+    <div class="box">
+         <img id="pic" src="" alt=""> 
+         <h1 class="heading"></h1>
+    </div>
+</body>
+ <script>
+    const requestUrl = 'https://api.github.com/users/Mehedi26696'
+    const xhr = new XMLHttpRequest()
+    let image;
+    let nam;
+    xhr.open('GET', requestUrl)
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState)
+        //data response came as string
+        if(xhr.readyState === 4){ 
+            // convert data(string) to JSON and json is object
+            const data = JSON.parse(this.responseText)
+
+            image = data.avatar_url
+            nam = data.name
+            console.log(data.name)
+            console.log(data.avatar_url)
+            document.getElementById('pic').src= `${data.avatar_url}`
+            document.querySelector('.heading').innerHTML = `${data.name}`
+             
+        }
+    }
+  
+    xhr.send()
+    
+      
+
+ </script>
+</html>
